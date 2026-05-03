@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ScrollingImg from "./Component/ScrollingImg";
+import AboutUs from "./Component/AboutUs";
 
 export default function Home() {
   return (
@@ -23,11 +24,12 @@ export default function Home() {
       </div>
       <ScrollingImg />
 
-      <div className="h-[80vh]">
+      {/* <div className="h-[80vh]">
         <h1 className="relative text-center text-2xl md:text-4xl font-semibold tracking-wide px-6 mt-2.5">
           ABOUT US
         </h1>
-      </div>
+      </div> */}
+      <AboutUs />
     </div>
   );
 }

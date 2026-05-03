@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, SetStateAction } from "react";
-import { GraduateStudent, Student, AlumniData, CurrentStudent} from "../Datas/GraduateStudent";
+import { GraduateStudent, Student, AlumniData, CurrentStudent } from "../Datas/GraduateStudent";
 
 type Identity = "Director" | "Current Student" | "Alumni";
 
@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      
+
       {/* 🔵 Tabs */}
       <div className="w-[85%] max-w-5xl mx-auto pt-10">
         <div className="flex border-b">
@@ -19,7 +19,7 @@ export default function Home() {
           <IdentityButton identity="Alumni" current={identity} setIdentity={setIdentity} />
         </div>
       </div>
-      
+
       {/* 🔵 Content */}
       <div className="w-[85%] max-w-5xl mx-auto">
         {identity === 'Director' && <Director />}
@@ -63,14 +63,14 @@ function IdentityButton({ identity, current, setIdentity }: IdentityButtonPros) 
 function Director() {
   return (
     <div className="mt-8 animate-fadeIn">
-      
+
       {/* 標題 */}
       <h2 className="text-xl font-semibold text-gray-700 mb-4">Director</h2>
 
       {/* 卡片 */}
       <div className="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition duration-300">
         <div className="flex flex-col md:flex-row gap-8 items-start">
-          
+
           {/* 圖片 */}
           <div className="flex-shrink-0">
             <img
@@ -119,7 +119,7 @@ function Director() {
 function Graduate() {
   return (
     <div className="mt-8 animate-fadeIn">
-      
+
       {/* 標題 */}
       <h2 className="text-xl font-semibold text-gray-700 mb-6">
         Students
@@ -138,13 +138,13 @@ function Graduate() {
 function StudentCard({ student }: { student: Student }) {
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group">
-      
+
       {/* 圖片 */}
       <div className="overflow-hidden">
         <img
           src={student.photoPath}
           alt={student.name}
-          className="w-full h-[220px] object-cover group-hover:scale-105 transition duration-300"
+          className="w-full h-[220px] object-contain group-hover:scale-105  transition duration-300"
         />
       </div>
 
@@ -154,7 +154,7 @@ function StudentCard({ student }: { student: Student }) {
           {student.name}
         </h3>
 
-        <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+        <p className="text-sm text-gray-600 mt-2 max-h-[80px] overflow-y-auto">
           {student.describe}
         </p>
       </div>
@@ -191,9 +191,10 @@ function AlumniCard({ data, onClick }: {
 }) {
   return (
     <div
-      onClick={onClick}
-      className="cursor-pointer bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group"
+
+      className="cursor-pointer bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group flex flex-col h-full"
     >
+      {/* 圖片 */}
       <div className="overflow-hidden">
         <img
           src={data.photoPath}
@@ -202,7 +203,8 @@ function AlumniCard({ data, onClick }: {
         />
       </div>
 
-      <div className="p-4">
+      {/* 內容 */}
+      <div className="p-4 flex flex-col flex-1">
         <h3 className="text-lg font-semibold text-gray-800">
           {data.name}
         </h3>
@@ -210,6 +212,10 @@ function AlumniCard({ data, onClick }: {
         <p className="text-sm text-gray-600 mt-2 max-h-[80px] overflow-y-auto">
           {data.describe}
         </p>
+
+        <div onClick={onClick} className="mt-auto pt-3 text-sm text-shadow-cyan-800 hover:underline text-right">
+          View Thesis →
+        </div>
       </div>
     </div>
   );
